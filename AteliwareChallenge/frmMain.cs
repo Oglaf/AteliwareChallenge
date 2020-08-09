@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Configuration;
 using System.Data;
+using System.Data.Odbc;
+using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -16,11 +18,12 @@ namespace AteliwareChallenge
         string connectionString;
         string name;
         string login;
+        string url;
 
         public frmMain()
         {
             InitializeComponent();
-            connectionString = ConfigurationManager.ConnectionStrings["AteliwareChallenge.Properties.Settings.GitRepoConnectionString"].ConnectionString;
+            connectionString = ConfigurationManager.ConnectionStrings["AteliwareChallenge.Properties.Settings.AzureSQLGitRepoConnectionString"].ConnectionString;
         }
 
         private void getRepoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -31,8 +34,6 @@ namespace AteliwareChallenge
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gitRepoDataSet.SearchResults' table. You can move, or remove it, as needed.
-            this.searchResultsTableAdapter.Fill(this.gitRepoDataSet.SearchResults);
             LoadRecords();
         }
 
@@ -57,27 +58,26 @@ namespace AteliwareChallenge
 
         private void InsertResult(string _name, string _url, string _login)
         {
-            byte[] zipFile = DownloadProjectsFromGitHub(_name, _url);
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
             {
-                string query = " IF NOT EXISTS (SELECT * FROM SearchResults WHERE url = @url) \n\r" +
+                string query = " IF NOT EXISTS (SELECT * FROM SearchResults WHERE url = ?) \n\r" +
                 " BEGIN \n\r" +
-                "     INSERT INTO SearchResults(name, url, repository, login) VALUES (@name, @url, @repository, @login) \n\r" +
+                "     INSERT INTO SearchResults(name, url, login) VALUES (?, ?, ?) \n\r" +
                 " SELECT SCOPE_IDENTITY() \n\r " +
                 " END \n\r " +
                 " ELSE SELECT 0";
 
                 using (
-                    SqlCommand command = new SqlCommand(query, connection))
+                    OdbcCommand command = new OdbcCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@name", _name);
-                    command.Parameters.AddWithValue("@url", _url);
-                    command.Parameters.AddWithValue("@login", _login);
-                    command.Parameters.AddWithValue("@repository", zipFile);
-
+                    command.Parameters.AddWithValue("@url", OdbcType.NVarChar).Value = _url;
+                    command.Parameters.AddWithValue("@name", OdbcType.VarChar).Value = _name;
+                    command.Parameters.AddWithValue("@url", OdbcType.NVarChar).Value = _url;
+                    command.Parameters.AddWithValue("@login", OdbcType.VarChar).Value = _login;
+                    command.CommandTimeout = 300;
                     connection.Open();
                     int result = command.ExecuteNonQuery();
+                    connection.Close();
 
                     if (result < 0)
                     {
@@ -88,7 +88,7 @@ namespace AteliwareChallenge
             }
         }
 
-        private byte[] DownloadProjectsFromGitHub(string _name, string _url)
+        private void DownloadProjectsFromGitHub(string _name, string _url)
         {
             Regex illegalInFileName = new Regex(@"[\\/:*?""<>|]");
             string name = illegalInFileName.Replace(_name, "");
@@ -103,16 +103,14 @@ namespace AteliwareChallenge
                     client.DownloadFile(downloadUrl, archivePath);
                 }
             }
-            byte[] bytes = System.IO.File.ReadAllBytes(archivePath);
-            File.Delete(archivePath); ;
 
-            return bytes;
+            MessageBox.Show("Repository saved at " + destinationDirectoryName);
         }
 
         private void LoadRecords()
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM SearchResults", connection))
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            using (OdbcDataAdapter adapter = new OdbcDataAdapter("SELECT * FROM SearchResults", connection))
             {
                 connection.Open();
 
@@ -134,7 +132,7 @@ namespace AteliwareChallenge
         {
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(name) )
             {
-                MessageBox.Show("Please select a repository.");
+                MessageBox.Show("Please select a row.");
             }
             else
             {
@@ -142,14 +140,45 @@ namespace AteliwareChallenge
                 form.Show();
             }
         }
-
-        private void gridSearchResult_SelectionChanged(object sender, EventArgs e)
+        private void gridSearchResult_SelectionChanged_1(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in gridSearchResult.SelectedRows)
             {
                 name = row.Cells[0].Value.ToString();
+                url = row.Cells[1].Value.ToString();
                 login = row.Cells[2].Value.ToString();
             }
+        }
+
+        private void downloadRepoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(name))
+            {
+                MessageBox.Show("Please select a row.");
+            }
+            else
+            {
+                DownloadProjectsFromGitHub(name, url);
+            }
+        }
+
+        private void clearResultsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OdbcConnection connection = new OdbcConnection(connectionString))
+            {
+                string query = "TRUNCATE TABLE SearchResults";
+
+                using (
+                    OdbcCommand command = new OdbcCommand(query, connection))
+                {
+                    command.CommandTimeout = 300;
+                    connection.Open();
+                    int result = command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+
+            LoadRecords();
         }
     }
 }

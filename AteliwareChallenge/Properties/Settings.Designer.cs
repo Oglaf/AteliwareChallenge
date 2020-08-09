@@ -33,5 +33,17 @@ namespace AteliwareChallenge.Properties {
                 return ((string)(this["GitRepoConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Driver={ODBC Driver 17 for SQL Server};server=tcp:azsqlateliwarechallenge.databas" +
+            "e.windows.net,1433;database=GitRepo;uid=christian.silva;pwd=a1RQ7qf8sCx1;encrypt" +
+            "=yes;trustservercertificate=no;connection timeout=30")]
+        public string AzureSQLGitRepoConnectionString {
+            get {
+                return ((string)(this["AzureSQLGitRepoConnectionString"]));
+            }
+        }
     }
 }

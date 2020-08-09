@@ -37,36 +37,40 @@
             this.uRLDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.loginDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.searchResultsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gitRepoDataSet = new AteliwareChallenge.GitRepoDataSet();
-            this.searchResultsTableAdapter = new AteliwareChallenge.GitRepoDataSetTableAdapters.SearchResultsTableAdapter();
+            this.azureSQLGitRepoDataSet = new AteliwareChallenge.AzureSQLGitRepoDataSet();
+            this.searchResultsTableAdapter = new AteliwareChallenge.AzureSQLGitRepoDataSetTableAdapters.SearchResultsTableAdapter();
+            this.downloadRepoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridSearchResult)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchResultsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gitRepoDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.azureSQLGitRepoDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // mStripMain
             // 
             this.mStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.getRepoToolStripMenuItem,
-            this.viewRepoDetailsToolStripMenuItem});
+            this.viewRepoDetailsToolStripMenuItem,
+            this.downloadRepoToolStripMenuItem,
+            this.clearResultsToolStripMenuItem});
             this.mStripMain.Location = new System.Drawing.Point(0, 0);
             this.mStripMain.Name = "mStripMain";
-            this.mStripMain.Size = new System.Drawing.Size(673, 24);
+            this.mStripMain.Size = new System.Drawing.Size(1108, 24);
             this.mStripMain.TabIndex = 0;
             // 
             // getRepoToolStripMenuItem
             // 
             this.getRepoToolStripMenuItem.Name = "getRepoToolStripMenuItem";
-            this.getRepoToolStripMenuItem.Size = new System.Drawing.Size(134, 20);
-            this.getRepoToolStripMenuItem.Text = "Search and Save Repo";
+            this.getRepoToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+            this.getRepoToolStripMenuItem.Text = "Search Repo";
             this.getRepoToolStripMenuItem.Click += new System.EventHandler(this.getRepoToolStripMenuItem_Click);
             // 
             // viewRepoDetailsToolStripMenuItem
             // 
             this.viewRepoDetailsToolStripMenuItem.Name = "viewRepoDetailsToolStripMenuItem";
-            this.viewRepoDetailsToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
-            this.viewRepoDetailsToolStripMenuItem.Text = "View repo details";
+            this.viewRepoDetailsToolStripMenuItem.Size = new System.Drawing.Size(112, 20);
+            this.viewRepoDetailsToolStripMenuItem.Text = "View Repo Details";
             this.viewRepoDetailsToolStripMenuItem.Click += new System.EventHandler(this.viewRepoDetailsToolStripMenuItem_Click);
             // 
             // gridSearchResult
@@ -81,12 +85,13 @@
             this.uRLDataGridViewTextBoxColumn,
             this.loginDataGridViewTextBoxColumn});
             this.gridSearchResult.DataSource = this.searchResultsBindingSource;
-            this.gridSearchResult.Location = new System.Drawing.Point(0, 27);
+            this.gridSearchResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridSearchResult.Location = new System.Drawing.Point(0, 24);
             this.gridSearchResult.Name = "gridSearchResult";
             this.gridSearchResult.ReadOnly = true;
-            this.gridSearchResult.Size = new System.Drawing.Size(661, 274);
-            this.gridSearchResult.TabIndex = 1;
-            this.gridSearchResult.SelectionChanged += new System.EventHandler(this.gridSearchResult_SelectionChanged);
+            this.gridSearchResult.Size = new System.Drawing.Size(1108, 504);
+            this.gridSearchResult.TabIndex = 2;
+            this.gridSearchResult.SelectionChanged += new System.EventHandler(this.gridSearchResult_SelectionChanged_1);
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -112,23 +117,37 @@
             // searchResultsBindingSource
             // 
             this.searchResultsBindingSource.DataMember = "SearchResults";
-            this.searchResultsBindingSource.DataSource = this.gitRepoDataSet;
+            this.searchResultsBindingSource.DataSource = this.azureSQLGitRepoDataSet;
             // 
-            // gitRepoDataSet
+            // azureSQLGitRepoDataSet
             // 
-            this.gitRepoDataSet.DataSetName = "GitRepoDataSet";
-            this.gitRepoDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.azureSQLGitRepoDataSet.DataSetName = "AzureSQLGitRepoDataSet";
+            this.azureSQLGitRepoDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // searchResultsTableAdapter
             // 
             this.searchResultsTableAdapter.ClearBeforeFill = true;
+            // 
+            // downloadRepoToolStripMenuItem
+            // 
+            this.downloadRepoToolStripMenuItem.Name = "downloadRepoToolStripMenuItem";
+            this.downloadRepoToolStripMenuItem.Size = new System.Drawing.Size(103, 20);
+            this.downloadRepoToolStripMenuItem.Text = "Download Repo";
+            this.downloadRepoToolStripMenuItem.Click += new System.EventHandler(this.downloadRepoToolStripMenuItem_Click);
+            // 
+            // clearResultsToolStripMenuItem
+            // 
+            this.clearResultsToolStripMenuItem.Name = "clearResultsToolStripMenuItem";
+            this.clearResultsToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.clearResultsToolStripMenuItem.Text = "Clear results";
+            this.clearResultsToolStripMenuItem.Click += new System.EventHandler(this.clearResultsToolStripMenuItem_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(673, 303);
+            this.ClientSize = new System.Drawing.Size(1108, 528);
             this.Controls.Add(this.gridSearchResult);
             this.Controls.Add(this.mStripMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -140,7 +159,7 @@
             this.mStripMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridSearchResult)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchResultsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gitRepoDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.azureSQLGitRepoDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,12 +171,14 @@
         private System.Windows.Forms.ToolStripMenuItem getRepoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewRepoDetailsToolStripMenuItem;
         private System.Windows.Forms.DataGridView gridSearchResult;
-        private GitRepoDataSet gitRepoDataSet;
+        private AzureSQLGitRepoDataSet azureSQLGitRepoDataSet;
         private System.Windows.Forms.BindingSource searchResultsBindingSource;
-        private GitRepoDataSetTableAdapters.SearchResultsTableAdapter searchResultsTableAdapter;
+        private AzureSQLGitRepoDataSetTableAdapters.SearchResultsTableAdapter searchResultsTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn uRLDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn loginDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ToolStripMenuItem downloadRepoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearResultsToolStripMenuItem;
     }
 }
 

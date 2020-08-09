@@ -20,9 +20,9 @@ namespace AteliwareChallenge {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("GitRepoDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("AzureSQLGitRepoDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class GitRepoDataSet : global::System.Data.DataSet {
+    public partial class AzureSQLGitRepoDataSet : global::System.Data.DataSet {
         
         private SearchResultsDataTable tableSearchResults;
         
@@ -30,7 +30,7 @@ namespace AteliwareChallenge {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public GitRepoDataSet() {
+        public AzureSQLGitRepoDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace AteliwareChallenge {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected GitRepoDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected AzureSQLGitRepoDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -127,7 +127,7 @@ namespace AteliwareChallenge {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            GitRepoDataSet cln = ((GitRepoDataSet)(base.Clone()));
+            AzureSQLGitRepoDataSet cln = ((AzureSQLGitRepoDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -199,9 +199,9 @@ namespace AteliwareChallenge {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "GitRepoDataSet";
+            this.DataSetName = "AzureSQLGitRepoDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/GitRepoDataSet.xsd";
+            this.Namespace = "http://tempuri.org/AzureSQLGitRepoDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableSearchResults = new SearchResultsDataTable();
@@ -225,7 +225,7 @@ namespace AteliwareChallenge {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            GitRepoDataSet ds = new GitRepoDataSet();
+            AzureSQLGitRepoDataSet ds = new AzureSQLGitRepoDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -283,9 +283,9 @@ namespace AteliwareChallenge {
             
             private global::System.Data.DataColumn columnName;
             
-            private global::System.Data.DataColumn columnRepository;
-            
             private global::System.Data.DataColumn columnLogin;
+            
+            private global::System.Data.DataColumn columnRepository;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -338,17 +338,17 @@ namespace AteliwareChallenge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn RepositoryColumn {
+            public global::System.Data.DataColumn LoginColumn {
                 get {
-                    return this.columnRepository;
+                    return this.columnLogin;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn LoginColumn {
+            public global::System.Data.DataColumn RepositoryColumn {
                 get {
-                    return this.columnLogin;
+                    return this.columnRepository;
                 }
             }
             
@@ -389,13 +389,13 @@ namespace AteliwareChallenge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public SearchResultsRow AddSearchResultsRow(string URL, string Name, byte[] Repository, string Login) {
+            public SearchResultsRow AddSearchResultsRow(string URL, string Name, string Login, byte[] Repository) {
                 SearchResultsRow rowSearchResultsRow = ((SearchResultsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         URL,
                         Name,
-                        Repository,
-                        Login};
+                        Login,
+                        Repository};
                 rowSearchResultsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSearchResultsRow);
                 return rowSearchResultsRow;
@@ -403,9 +403,9 @@ namespace AteliwareChallenge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public SearchResultsRow FindByURL(string URL) {
+            public SearchResultsRow FindByName(string Name) {
                 return ((SearchResultsRow)(this.Rows.Find(new object[] {
-                            URL})));
+                            Name})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -427,8 +427,8 @@ namespace AteliwareChallenge {
             internal void InitVars() {
                 this.columnURL = base.Columns["URL"];
                 this.columnName = base.Columns["Name"];
-                this.columnRepository = base.Columns["Repository"];
                 this.columnLogin = base.Columns["Login"];
+                this.columnRepository = base.Columns["Repository"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -438,16 +438,15 @@ namespace AteliwareChallenge {
                 base.Columns.Add(this.columnURL);
                 this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnName);
-                this.columnRepository = new global::System.Data.DataColumn("Repository", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRepository);
                 this.columnLogin = new global::System.Data.DataColumn("Login", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLogin);
+                this.columnRepository = new global::System.Data.DataColumn("Repository", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRepository);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnURL}, true));
+                                this.columnName}, true));
                 this.columnURL.AllowDBNull = false;
-                this.columnURL.Unique = true;
-                this.columnURL.MaxLength = 50;
                 this.columnName.AllowDBNull = false;
+                this.columnName.Unique = true;
                 this.columnName.MaxLength = 50;
                 this.columnLogin.AllowDBNull = false;
                 this.columnLogin.MaxLength = 50;
@@ -518,7 +517,7 @@ namespace AteliwareChallenge {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                GitRepoDataSet ds = new GitRepoDataSet();
+                AzureSQLGitRepoDataSet ds = new AzureSQLGitRepoDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -615,6 +614,17 @@ namespace AteliwareChallenge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Login {
+                get {
+                    return ((string)(this[this.tableSearchResults.LoginColumn]));
+                }
+                set {
+                    this[this.tableSearchResults.LoginColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public byte[] Repository {
                 get {
                     try {
@@ -626,17 +636,6 @@ namespace AteliwareChallenge {
                 }
                 set {
                     this[this.tableSearchResults.RepositoryColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string Login {
-                get {
-                    return ((string)(this[this.tableSearchResults.LoginColumn]));
-                }
-                set {
-                    this[this.tableSearchResults.LoginColumn] = value;
                 }
             }
             
@@ -688,7 +687,7 @@ namespace AteliwareChallenge {
         }
     }
 }
-namespace AteliwareChallenge.GitRepoDataSetTableAdapters {
+namespace AteliwareChallenge.AzureSQLGitRepoDataSetTableAdapters {
     
     
     /// <summary>
@@ -702,13 +701,13 @@ namespace AteliwareChallenge.GitRepoDataSetTableAdapters {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class SearchResultsTableAdapter : global::System.ComponentModel.Component {
         
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        private global::System.Data.Odbc.OdbcDataAdapter _adapter;
         
-        private global::System.Data.SqlClient.SqlConnection _connection;
+        private global::System.Data.Odbc.OdbcConnection _connection;
         
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        private global::System.Data.Odbc.OdbcTransaction _transaction;
         
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        private global::System.Data.Odbc.OdbcCommand[] _commandCollection;
         
         private bool _clearBeforeFill;
         
@@ -720,7 +719,7 @@ namespace AteliwareChallenge.GitRepoDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+        protected internal global::System.Data.Odbc.OdbcDataAdapter Adapter {
             get {
                 if ((this._adapter == null)) {
                     this.InitAdapter();
@@ -731,7 +730,7 @@ namespace AteliwareChallenge.GitRepoDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
+        internal global::System.Data.Odbc.OdbcConnection Connection {
             get {
                 if ((this._connection == null)) {
                     this.InitConnection();
@@ -751,7 +750,7 @@ namespace AteliwareChallenge.GitRepoDataSetTableAdapters {
                 }
                 for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
                     if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                        ((global::System.Data.Odbc.OdbcCommand)(this.CommandCollection[i])).Connection = value;
                     }
                 }
             }
@@ -759,7 +758,7 @@ namespace AteliwareChallenge.GitRepoDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+        internal global::System.Data.Odbc.OdbcTransaction Transaction {
             get {
                 return this._transaction;
             }
@@ -785,7 +784,7 @@ namespace AteliwareChallenge.GitRepoDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+        protected global::System.Data.Odbc.OdbcCommand[] CommandCollection {
             get {
                 if ((this._commandCollection == null)) {
                     this.InitCommandCollection();
@@ -808,61 +807,65 @@ namespace AteliwareChallenge.GitRepoDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            this._adapter = new global::System.Data.Odbc.OdbcDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "SearchResults";
             tableMapping.ColumnMappings.Add("URL", "URL");
             tableMapping.ColumnMappings.Add("Name", "Name");
-            tableMapping.ColumnMappings.Add("Repository", "Repository");
             tableMapping.ColumnMappings.Add("Login", "Login");
+            tableMapping.ColumnMappings.Add("Repository", "Repository");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[SearchResults] WHERE (([URL] = @Original_URL) AND ([Name] = @O" +
-                "riginal_Name) AND ([Login] = @Original_Login))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [GitRepo].[dbo].[SearchResults] WHERE (([URL] = ?) AND ([Name] = ?) A" +
+                "ND ([Login] = ?) AND ((? = 1 AND [Repository] IS NULL) OR ([Repository] = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_URL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "URL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Login", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_URL", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "URL", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_Name", global::System.Data.Odbc.OdbcType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Name", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_Login", global::System.Data.Odbc.OdbcType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Login", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("IsNull_Repository", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Repository", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_Repository", global::System.Data.Odbc.OdbcType.VarBinary, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Repository", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.InsertCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[SearchResults] ([URL], [Name], [Repository], [Login]) VALUES (" +
-                "@URL, @Name, @Repository, @Login);\r\nSELECT URL, Name, Repository, Login FROM Sea" +
-                "rchResults WHERE (URL = @URL)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [GitRepo].[dbo].[SearchResults] ([URL], [Name], [Login], [Repository]" +
+                ") VALUES (?, ?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@URL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "URL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Repository", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Repository", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Login", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("URL", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "URL", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Name", global::System.Data.Odbc.OdbcType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Name", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Login", global::System.Data.Odbc.OdbcType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Login", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Repository", global::System.Data.Odbc.OdbcType.VarBinary, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Repository", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[SearchResults] SET [URL] = @URL, [Name] = @Name, [Repository] = @Repository, [Login] = @Login WHERE (([URL] = @Original_URL) AND ([Name] = @Original_Name) AND ([Login] = @Original_Login));
-SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [GitRepo].[dbo].[SearchResults] SET [URL] = ?, [Name] = ?, [Login] = ?, [R" +
+                "epository] = ? WHERE (([URL] = ?) AND ([Name] = ?) AND ([Login] = ?) AND ((? = 1" +
+                " AND [Repository] IS NULL) OR ([Repository] = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@URL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "URL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Repository", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Repository", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Login", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_URL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "URL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Login", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("URL", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "URL", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Name", global::System.Data.Odbc.OdbcType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Name", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Login", global::System.Data.Odbc.OdbcType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Login", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Repository", global::System.Data.Odbc.OdbcType.VarBinary, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Repository", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_URL", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "URL", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_Name", global::System.Data.Odbc.OdbcType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Name", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_Login", global::System.Data.Odbc.OdbcType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Login", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("IsNull_Repository", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Repository", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_Repository", global::System.Data.Odbc.OdbcType.VarBinary, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Repository", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::AteliwareChallenge.Properties.Settings.Default.GitRepoConnectionString;
+            this._connection = new global::System.Data.Odbc.OdbcConnection();
+            this._connection.ConnectionString = global::AteliwareChallenge.Properties.Settings.Default.AzureSQLGitRepoConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection = new global::System.Data.Odbc.OdbcCommand[1];
+            this._commandCollection[0] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT URL, Name, Repository, Login FROM dbo.SearchResults";
+            this._commandCollection[0].CommandText = "SELECT URL, Name, Login, Repository FROM dbo.SearchResults";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -870,7 +873,7 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(GitRepoDataSet.SearchResultsDataTable dataTable) {
+        public virtual int Fill(AzureSQLGitRepoDataSet.SearchResultsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -883,9 +886,9 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual GitRepoDataSet.SearchResultsDataTable GetData() {
+        public virtual AzureSQLGitRepoDataSet.SearchResultsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            GitRepoDataSet.SearchResultsDataTable dataTable = new GitRepoDataSet.SearchResultsDataTable();
+            AzureSQLGitRepoDataSet.SearchResultsDataTable dataTable = new AzureSQLGitRepoDataSet.SearchResultsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -893,14 +896,14 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(GitRepoDataSet.SearchResultsDataTable dataTable) {
+        public virtual int Update(AzureSQLGitRepoDataSet.SearchResultsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(GitRepoDataSet dataSet) {
+        public virtual int Update(AzureSQLGitRepoDataSet dataSet) {
             return this.Adapter.Update(dataSet, "SearchResults");
         }
         
@@ -923,7 +926,7 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(string Original_URL, string Original_Name, string Original_Login) {
+        public virtual int Delete(string Original_URL, string Original_Name, string Original_Login, byte[] Original_Repository) {
             if ((Original_URL == null)) {
                 throw new global::System.ArgumentNullException("Original_URL");
             }
@@ -941,6 +944,14 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_Login));
+            }
+            if ((Original_Repository == null)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((byte[])(Original_Repository));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -962,7 +973,7 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string URL, string Name, byte[] Repository, string Login) {
+        public virtual int Insert(string URL, string Name, string Login, byte[] Repository) {
             if ((URL == null)) {
                 throw new global::System.ArgumentNullException("URL");
             }
@@ -975,17 +986,17 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Name));
             }
-            if ((Repository == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((byte[])(Repository));
-            }
             if ((Login == null)) {
                 throw new global::System.ArgumentNullException("Login");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Login));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Login));
+            }
+            if ((Repository == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((byte[])(Repository));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1007,7 +1018,7 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string URL, string Name, byte[] Repository, string Login, string Original_URL, string Original_Name, string Original_Login) {
+        public virtual int Update(string URL, string Name, string Login, byte[] Repository, string Original_URL, string Original_Name, string Original_Login, byte[] Original_Repository) {
             if ((URL == null)) {
                 throw new global::System.ArgumentNullException("URL");
             }
@@ -1020,17 +1031,17 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Name));
             }
-            if ((Repository == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((byte[])(Repository));
-            }
             if ((Login == null)) {
                 throw new global::System.ArgumentNullException("Login");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Login));
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Login));
+            }
+            if ((Repository == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((byte[])(Repository));
             }
             if ((Original_URL == null)) {
                 throw new global::System.ArgumentNullException("Original_URL");
@@ -1049,6 +1060,14 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_Login));
+            }
+            if ((Original_Repository == null)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((byte[])(Original_Repository));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1070,8 +1089,8 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Name, byte[] Repository, string Login, string Original_URL, string Original_Name, string Original_Login) {
-            return this.Update(Original_URL, Name, Repository, Login, Original_URL, Original_Name, Original_Login);
+        public virtual int Update(string URL, string Login, byte[] Repository, string Original_URL, string Original_Name, string Original_Login, byte[] Original_Repository) {
+            return this.Update(URL, Original_Name, Login, Repository, Original_URL, Original_Name, Original_Login, Original_Repository);
         }
     }
     
@@ -1166,7 +1185,7 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateUpdatedRows(GitRepoDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(AzureSQLGitRepoDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._searchResultsTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.SearchResults.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
@@ -1185,7 +1204,7 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateInsertedRows(GitRepoDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(AzureSQLGitRepoDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._searchResultsTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.SearchResults.Select(null, null, global::System.Data.DataViewRowState.Added);
@@ -1203,7 +1222,7 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateDeletedRows(GitRepoDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(AzureSQLGitRepoDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             if ((this._searchResultsTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.SearchResults.Select(null, null, global::System.Data.DataViewRowState.Deleted);
@@ -1245,7 +1264,7 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public virtual int UpdateAll(GitRepoDataSet dataSet) {
+        public virtual int UpdateAll(AzureSQLGitRepoDataSet dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }
@@ -1291,8 +1310,8 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
                 //
                 if ((this._searchResultsTableAdapter != null)) {
                     revertConnections.Add(this._searchResultsTableAdapter, this._searchResultsTableAdapter.Connection);
-                    this._searchResultsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._searchResultsTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    this._searchResultsTableAdapter.Connection = ((global::System.Data.Odbc.OdbcConnection)(workConnection));
+                    this._searchResultsTableAdapter.Transaction = ((global::System.Data.Odbc.OdbcTransaction)(workTransaction));
                     if (this._searchResultsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._searchResultsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._searchResultsTableAdapter.Adapter);
@@ -1357,7 +1376,7 @@ SELECT URL, Name, Repository, Login FROM SearchResults WHERE (URL = @URL)";
                     workConnection.Close();
                 }
                 if ((this._searchResultsTableAdapter != null)) {
-                    this._searchResultsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._searchResultsTableAdapter]));
+                    this._searchResultsTableAdapter.Connection = ((global::System.Data.Odbc.OdbcConnection)(revertConnections[this._searchResultsTableAdapter]));
                     this._searchResultsTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
